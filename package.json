@@ -22,6 +22,9 @@
     "helmet",
     "referrer-policy"
   ],
+  "files": [
+    "src"
+  ],
   "author": "PoppinL",
   "license": "MIT",
   "bugs": {
