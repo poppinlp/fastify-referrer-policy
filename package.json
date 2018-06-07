@@ -1,6 +1,6 @@
 {
   "name": "fastify-referrer-policy",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Fastify plugin to set the Referrer-Policy HTTP header",
   "main": "src/index.js",
   "scripts": {
