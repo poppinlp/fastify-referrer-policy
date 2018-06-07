@@ -1,0 +1,4 @@
+Average req/sec in 5 times 10s test
+with no plugin: 31204.73
+with referrer-policy middleware: 29244.05
+with fastify-referrer-policy plugin: 31029.42

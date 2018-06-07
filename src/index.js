@@ -1,6 +1,6 @@
 const fp = require('fastify-plugin');
 
-const referrerPolicy = (app, opts = {}, next) => {
+const referrerPolicy = (app, opts, next) => {
 	const DEFAULT_POLICY = 'no-referrer';
 	const ALLOWED_POLICIES = new Set([
 		'no-referrer',
