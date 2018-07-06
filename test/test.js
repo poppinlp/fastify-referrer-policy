@@ -12,54 +12,49 @@ test.beforeEach(t => {
 	t.context.app = app;
 });
 
-const testHandler = (t, opts, expectedHeader, params = '') => {
-	const { app } = t.context;
-
-	t.plan(3);
-	app.register(plugin, opts);
-	app.inject(
-		{
-			method: 'GET',
-			url: `/${params}`
-		},
-		(err, res) => {
-			const expected = {
-				payload: 'hello world',
-				header: expectedHeader
-			};
-			const target = {
-				payload: res.payload,
-				header: res.headers['referrer-policy']
-			};
-
-			t.is(err, null, 'should throw no error');
-			t.is(target.payload, expected.payload, 'should have expected response payload');
-			t.is(target.header, expected.header, 'should have expected response header');
-			t.end();
-		}
-	);
+const mock = async (t, opts) => {
+	const rsp = await t.context.app.register(plugin, opts).inject({
+		method: 'get',
+		url: '/'
+	});
+	return rsp.headers['referrer-policy'];
 };
 
-test.cb('default option', t => {
-	testHandler(t, {}, 'no-referrer');
+test('default header should be no-referrer', async t => {
+	const header = await mock(t);
+	t.is(header, 'no-referrer');
 });
 
-test.cb('set valid policy', t => {
-	testHandler(
-		t,
-		{
-			policy: 'same-origin'
-		},
-		'same-origin'
-	);
+[
+	'no-referrer',
+	'no-referrer-when-downgrade',
+	'same-origin',
+	'origin',
+	'strict-origin',
+	'origin-when-cross-origin',
+	'strict-origin-when-cross-origin',
+	'unsafe-url',
+	''
+].forEach(policy => {
+	test(`can set the header to "${policy}"`, async t => {
+		const header = await mock(t, { policy });
+		t.is(header, policy);
+	});
 });
 
-test.cb('set invalid policy', t => {
-	testHandler(
-		t,
-		{
-			policy: 'invalid-policy'
-		},
-		'no-referrer'
-	);
+[
+	'garbage',
+	'sameorigin',
+	123,
+	false,
+	null,
+	{},
+	[],
+	['same-origin'],
+	/cool_regex/g
+].forEach(policy => {
+	test(`should use default header for invalid policy "${JSON.stringify(policy)}"`, async t => {
+		const header = await mock(t, { policy });
+		t.is(header, 'no-referrer');
+	});
 });

@@ -1,4 +1,8 @@
-Average req/sec in 5 times 10s test
-with no plugin: 31204.73
-with referrer-policy middleware: 29244.05
-with fastify-referrer-policy plugin: 31029.42
+node version: v10.6.0
+platform: darwin
+cpus: [{"model":"Intel(R) Core(TM) i7-5557U CPU @ 3.10GHz","speed":3100,"times":{"user":71826250,"nice":0,"sys":38852600,"idle":279667590,"irq":0}},{"model":"Intel(R) Core(TM) i7-5557U CPU @ 3.10GHz","speed":3100,"times":{"user":39306940,"nice":0,"sys":16608520,"idle":334411590,"irq":0}},{"model":"Intel(R) Core(TM) i7-5557U CPU @ 3.10GHz","speed":3100,"times":{"user":69285630,"nice":0,"sys":32748220,"idle":288293250,"irq":0}},{"model":"Intel(R) Core(TM) i7-5557U CPU @ 3.10GHz","speed":3100,"times":{"user":40039460,"nice":0,"sys":16141480,"idle":334146080,"irq":0}}]
+
+Average req/sec in 3 times 10s test
+with no plugin: 23562.57
+with referrer-policy middleware: 20195.80
+with fastify-referrer-policy plugin: 22139.53

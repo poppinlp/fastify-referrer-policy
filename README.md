@@ -17,6 +17,11 @@ You may know [referrer-policy](https://github.com/helmetjs/referrer-policy) as a
 
 You may find the reason in [benchmark result](./benchmarks/benchmark.txt) and wish you like it. :)
 
+## Difference
+
+This plugin has passed all [referrer-policy](https://github.com/helmetjs/referrer-policy) test cases.
+And no difference in options.
+
 ## Install
 
 Via npm:
@@ -51,7 +56,7 @@ This plugin has the same options as the middleware in helmet.
 
 ### policy {string}
 
-Set `Referrer-Policy` to this value if it's a valid one. Default is `no-referrer`. Will use default value for any invalid input. Valid list: 
+Set `Referrer-Policy` to this value if it's a valid one. Default is `no-referrer`. Will use default value for any invalid input. Valid list:
 
 - no-referrer
 - no-referrer-when-downgrade
@@ -66,6 +71,9 @@ You could [read the spec](https://www.w3.org/TR/referrer-policy/#referrer-polici
 
 ## Changelog
 
+- 0.3.0
+  - Fix can't set empty string
+  - Update test case
 - 0.2.0
   - Add test case
   - Add code coverage

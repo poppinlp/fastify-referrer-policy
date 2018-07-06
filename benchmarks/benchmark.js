@@ -1,5 +1,5 @@
 const { writeFileSync } = require('fs');
-const { EOL } = require('os');
+const { EOL, platform, cpus } = require('os');
 const { fork } = require('child_process');
 const autocannon = require('autocannon');
 const { host, port, path } = require('./config');
@@ -41,7 +41,7 @@ const test = name => new Promise((resolve, reject) => {
 const sleep = time => new Promise(resolve => setTimeout(resolve, time));
 
 const doCase = async name => {
-	const COUNT = 5;
+	const COUNT = 3;
 	const SLEEP = 3000;
 	const { desc } = caseMap[name];
 
@@ -57,7 +57,11 @@ const doCase = async name => {
 
 (async () => {
 	const txt = [
-		'Average req/sec in 5 times 10s test',
+		`node version: ${process.version}`,
+		`platform: ${platform()}`,
+		`cpus: ${JSON.stringify(cpus())}`,
+		'',
+		'Average req/sec in 3 times 10s test',
 		await doCase('pure'),
 		await doCase('middleware'),
 		await doCase('plugin')

@@ -13,7 +13,9 @@ const referrerPolicy = (app, opts, next) => {
 		'unsafe-url',
 		''
 	]);
-	const policy = opts.policy !== undefined && ALLOWED_POLICIES.has(opts.policy) && opts.policy || DEFAULT_POLICY;
+	const policy = opts.policy !== undefined && ALLOWED_POLICIES.has(opts.policy)
+		? opts.policy
+		: DEFAULT_POLICY;
 
 	app.addHook('onSend', (request, reply, payload, next) => {
 		reply.header('Referrer-Policy', policy);
